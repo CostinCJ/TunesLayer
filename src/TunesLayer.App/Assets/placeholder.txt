@@ -1,0 +1,15 @@
+TunesLayer Assets Directory
+
+Place the following assets here:
+- icon.ico - Application icon (256x256, 128x128, 64x64, 48x48, 32x32, 16x16)
+
+For creating the icon:
+1. Create a design with your preferred tool (Figma, Photoshop, etc.)
+2. Export as PNG at various sizes
+3. Use a tool like https://icoconvert.com to create the .ico file
+
+Recommended icon design:
+- Simple, recognizable silhouette
+- Works well at small sizes
+- Uses the primary brand color (#8B5CF6 purple)
+- Music/layer theme (e.g., stacked sound waves, layered vinyl records)

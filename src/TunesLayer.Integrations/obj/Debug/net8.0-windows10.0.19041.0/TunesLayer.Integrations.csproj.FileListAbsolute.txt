@@ -1,0 +1,16 @@
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\bin\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.deps.json
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\bin\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\bin\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.pdb
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\bin\Debug\net8.0-windows10.0.19041.0\TunesLayer.Core.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\bin\Debug\net8.0-windows10.0.19041.0\TunesLayer.Core.pdb
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.csproj.AssemblyReference.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.AssemblyInfoInputs.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.AssemblyInfo.cs
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.csproj.CoreCompileInputs.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.sourcelink.json
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLay.929C7C6A.Up2Date
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\refint\TunesLayer.Integrations.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.Integrations.pdb
+D:\Tuneify\Tuneify\src\TunesLayer.Integrations\obj\Debug\net8.0-windows10.0.19041.0\ref\TunesLayer.Integrations.dll
