@@ -24,17 +24,12 @@ public class OverlayManager : IOverlayManager
             _overlayWindow = new OverlayWindow(_mediaService, _settingsService);
             
             // Apply saved settings
+            // Note: opacity and click-through are applied in Window_Loaded after the hwnd is available
             var settings = _settingsService.CurrentSettings;
-            _overlayWindow.Opacity = settings.OverlayOpacity;
             _overlayWindow.Width = settings.OverlaySize;
             _overlayWindow.Height = settings.OverlaySize;
             _overlayWindow.Left = settings.OverlayX;
             _overlayWindow.Top = settings.OverlayY;
-
-            if (settings.ClickThroughEnabled)
-            {
-                _overlayWindow.SetClickThrough(true);
-            }
 
             if (settings.ShowOverlayOnStartup)
             {
@@ -77,7 +72,7 @@ public class OverlayManager : IOverlayManager
         Application.Current.Dispatcher.Invoke(() =>
         {
             if (_overlayWindow != null)
-                _overlayWindow.Opacity = opacity;
+                _overlayWindow.SetContentOpacity(opacity);
         });
     }
 
@@ -98,6 +93,23 @@ public class OverlayManager : IOverlayManager
         Application.Current.Dispatcher.Invoke(() =>
         {
             _overlayWindow?.SetClickThrough(enabled);
+        });
+    }
+
+    public bool IsClickThrough => _overlayWindow?.IsClickThrough ?? false;
+
+    public void ToggleClickThrough()
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            if (_overlayWindow == null) return;
+            
+            bool newState = !_overlayWindow.IsClickThrough;
+            _overlayWindow.SetClickThrough(newState);
+            
+            // Save the setting
+            _settingsService.CurrentSettings.ClickThroughEnabled = newState;
+            _ = _settingsService.SaveAsync();
         });
     }
 

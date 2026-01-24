@@ -22,6 +22,7 @@ public class AppSettings
     public string HotkeyVolumeUp { get; set; } = "Ctrl+Alt+Up";
     public string HotkeyVolumeDown { get; set; } = "Ctrl+Alt+Down";
     public string HotkeyToggleOverlay { get; set; } = "Ctrl+Alt+O";
+    public string HotkeyToggleClickThrough { get; set; } = "Ctrl+Alt+C";
 
     // Theme
     public string SelectedTheme { get; set; } = "midnight";

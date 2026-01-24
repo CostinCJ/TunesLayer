@@ -81,28 +81,25 @@
 
     <!-- TabItem Style - Retro -->
     <Style TargetType="TabItem">
+        <Setter Property="Foreground" Value="#FFFFFF" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
-                    <Border x:Name="Border" Padding="12,8" Margin="0,0,5,0" CornerRadius="2"
-                            BorderThickness="2" BorderBrush="Transparent">
-                        <ContentPresenter ContentSource="Header" />
+                    <Border x:Name="Border" Padding="12,8" Margin="2,0" Background="Transparent"
+                            BorderThickness="0,0,0,2" BorderBrush="Transparent">
+                        <ContentPresenter ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource PrimaryBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FEF3C7" />
-                            <Setter Property="Foreground" Value="#1C1917" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
                         </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource CardBackgroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource BorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
     </Style>
 
 </ResourceDictionary>

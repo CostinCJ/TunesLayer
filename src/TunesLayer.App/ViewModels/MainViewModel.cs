@@ -34,6 +34,25 @@ public partial class MainViewModel : ObservableObject
         LoadThemes();
         LoadAnalytics();
         _isLoadingSettings = false;
+        
+        // Poll for settings changes (e.g., from hotkeys) every 500ms
+        var syncTimer = new System.Windows.Threading.DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(500)
+        };
+        syncTimer.Tick += (s, e) => SyncSettingsFromService();
+        syncTimer.Start();
+    }
+    
+    private void SyncSettingsFromService()
+    {
+        // Sync click-through state from overlay manager (updated by hotkey)
+        if (_overlayManager.IsClickThrough != ClickThroughEnabled)
+        {
+            _isLoadingSettings = true;
+            ClickThroughEnabled = _overlayManager.IsClickThrough;
+            _isLoadingSettings = false;
+        }
     }
 
     // General Settings
@@ -72,6 +91,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _hotkeyToggleOverlay = "Ctrl+Alt+O";
 
+    [ObservableProperty]
+    private string _hotkeyToggleClickThrough = "Ctrl+Alt+C";
+
     // Theme Settings
     [ObservableProperty]
     private ObservableCollection<ThemeInfo> _availableThemes = new();
@@ -107,6 +129,7 @@ public partial class MainViewModel : ObservableObject
         HotkeyNext = settings.HotkeyNext;
         HotkeyPrevious = settings.HotkeyPrevious;
         HotkeyToggleOverlay = settings.HotkeyToggleOverlay;
+        HotkeyToggleClickThrough = settings.HotkeyToggleClickThrough;
         DiscordEnabled = settings.DiscordEnabled;
         OBSWidgetEnabled = settings.OBSWidgetEnabled;
     }
@@ -231,6 +254,14 @@ public partial class MainViewModel : ObservableObject
         _settingsService.CurrentSettings.HotkeyToggleOverlay = value;
         _settingsService.SaveAsync();
         _hotkeyService.RegisterHotkey("ToggleOverlay", value, () => _overlayManager.Toggle());
+    }
+
+    partial void OnHotkeyToggleClickThroughChanged(string value)
+    {
+        if (_isLoadingSettings) return;
+        _settingsService.CurrentSettings.HotkeyToggleClickThrough = value;
+        _settingsService.SaveAsync();
+        _hotkeyService.RegisterHotkey("ToggleClickThrough", value, () => _overlayManager.ToggleClickThrough());
     }
 
     partial void OnDiscordEnabledChanged(bool value)

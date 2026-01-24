@@ -76,6 +76,7 @@ public partial class App : Application
         var overlayManager = _serviceProvider.GetRequiredService<IOverlayManager>();
         overlayManager.Initialize();
         hotkeyService.RegisterHotkey("ToggleOverlay", settings.HotkeyToggleOverlay, () => overlayManager.Toggle());
+        hotkeyService.RegisterHotkey("ToggleClickThrough", settings.HotkeyToggleClickThrough, () => overlayManager.ToggleClickThrough());
 
         // Start analytics tracking
         var analyticsService = _serviceProvider.GetRequiredService<IAnalyticsService>();

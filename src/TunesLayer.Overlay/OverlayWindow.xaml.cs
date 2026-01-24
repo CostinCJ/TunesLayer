@@ -37,6 +37,8 @@ public partial class OverlayWindow : Window
     private bool _isDragging;
     private Point _dragStartPoint;
 
+    public bool IsClickThrough => _isClickThrough;
+
     public OverlayWindow(IMediaSessionService mediaService, ISettingsService settingsService)
     {
         InitializeComponent();
@@ -62,6 +64,19 @@ public partial class OverlayWindow : Window
 
         // Initialize play/pause button with current state
         UpdatePlayPauseIcon(_mediaService.IsPlaying);
+        
+        // Apply saved opacity to the content (MainBorder)
+        var savedOpacity = _settingsService.CurrentSettings.OverlayOpacity;
+        if (savedOpacity > 0)
+        {
+            MainBorder.Opacity = savedOpacity;
+        }
+        
+        // Apply saved click-through setting (must be done after _hwnd is set)
+        if (_settingsService.CurrentSettings.ClickThroughEnabled)
+        {
+            SetClickThrough(true);
+        }
 
         // Fade in animation
         var fadeIn = (Storyboard)FindResource("FadeIn");
@@ -106,6 +121,11 @@ public partial class OverlayWindow : Window
 
         SetWindowLong(_hwnd, GWL_EXSTYLE, extendedStyle);
         _isClickThrough = enabled;
+    }
+
+    public void SetContentOpacity(double opacity)
+    {
+        MainBorder.Opacity = opacity;
     }
 
     private void OnPlaybackStateChanged(object? sender, bool isPlaying)
