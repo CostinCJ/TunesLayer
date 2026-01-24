@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TunesLayer.Core.Models;
 using TunesLayer.Core.Services;
 using TunesLayer.Overlay;
+using TunesLayer.Integrations.Discord;
 
 namespace TunesLayer.App.ViewModels;
 
@@ -18,6 +19,7 @@ public partial class MainViewModel : ObservableObject
     private readonly IAnalyticsService _analyticsService;
     private readonly IHotkeyService _hotkeyService;
     private readonly IMediaSessionService _mediaService;
+    private readonly IDiscordRpcService _discordService;
     private bool _isLoadingSettings;
 
     public MainViewModel()
@@ -28,6 +30,7 @@ public partial class MainViewModel : ObservableObject
         _analyticsService = App.Services.GetRequiredService<IAnalyticsService>();
         _hotkeyService = App.Services.GetRequiredService<IHotkeyService>();
         _mediaService = App.Services.GetRequiredService<IMediaSessionService>();
+        _discordService = App.Services.GetRequiredService<IDiscordRpcService>();
 
         _isLoadingSettings = true;
         LoadSettings();
@@ -274,9 +277,20 @@ public partial class MainViewModel : ObservableObject
 
     partial void OnDiscordEnabledChanged(bool value)
     {
+        if (_isLoadingSettings) return;
+        
         _settingsService.CurrentSettings.DiscordEnabled = value;
         _settingsService.SaveAsync();
-        // TODO: Enable/disable Discord integration
+        
+        // Reinitialize Discord service to apply the new setting
+        if (value)
+        {
+            _discordService.Initialize();
+        }
+        else
+        {
+            _discordService.Dispose();
+        }
     }
 
     partial void OnOBSWidgetEnabledChanged(bool value)

@@ -162,7 +162,7 @@ public class AnalyticsService : IAnalyticsService
         var trackId = $"{media.Artist}_{media.Title}";
         
         // When a new track starts, finalize the previous track's duration
-        if (_currentTrackPlayId \u003e 0)
+        if (_currentTrackPlayId > 0)
         {
             FinalizeCurrentTrack();
         }

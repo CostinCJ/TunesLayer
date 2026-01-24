@@ -95,6 +95,10 @@ public partial class App : Application
         var analyticsService = _serviceProvider.GetRequiredService<IAnalyticsService>();
         analyticsService.StartSession();
 
+        // Initialize Discord integration
+        var discordService = _serviceProvider.GetRequiredService<IDiscordRpcService>();
+        discordService.Initialize();
+
         // Setup system tray
         SetupSystemTray();
 

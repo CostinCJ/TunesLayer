@@ -9,7 +9,7 @@ public class DiscordRpcService : IDiscordRpcService, IDisposable
 {
     // Note: You'll need to create a Discord application and get an App ID
     // https://discord.com/developers/applications
-    private const string DISCORD_APP_ID = "YOUR_DISCORD_APP_ID";
+    private const string DISCORD_APP_ID = "1464593089812238368";
     
     private DiscordRpcClient? _client;
     private readonly IMediaSessionService _mediaService;
@@ -139,6 +139,7 @@ public class DiscordRpcService : IDiscordRpcService, IDisposable
         {
             "spotify" => "spotify_icon",
             "apple music" => "apple_music_icon",
+            "youtube" => "youtube_icon",
             "youtube music" => "youtube_music_icon",
             _ => "music_icon"
         };
