@@ -94,6 +94,9 @@ public class AnalyticsService : IAnalyticsService
         _activeWindowTimer?.Stop();
         _activeWindowTimer?.Dispose();
 
+        // Finalize any currently playing track
+        FinalizeCurrentTrack();
+
         if (_currentSessionId <= 0) return;
 
         using var connection = new SqliteConnection(_connectionString);
@@ -149,11 +152,20 @@ public class AnalyticsService : IAnalyticsService
             windowTitle.Contains(g, StringComparison.OrdinalIgnoreCase));
     }
 
+    private int _currentTrackPlayId = -1;
+    private DateTime _currentTrackStartTime;
+
     public void TrackMediaPlayed(MediaInfo media)
     {
         if (media == null || string.IsNullOrEmpty(media.Title)) return;
 
         var trackId = $"{media.Artist}_{media.Title}";
+        
+        // When a new track starts, finalize the previous track's duration
+        if (_currentTrackPlayId \u003e 0)
+        {
+            FinalizeCurrentTrack();
+        }
         
         // Avoid duplicate entries for the same track within 5 seconds
         if (trackId == _lastTrackId && (DateTime.Now - _lastTrackTime).TotalSeconds < 5)
@@ -161,6 +173,7 @@ public class AnalyticsService : IAnalyticsService
 
         _lastTrackId = trackId;
         _lastTrackTime = DateTime.Now;
+        _currentTrackStartTime = DateTime.Now;
 
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -168,7 +181,8 @@ public class AnalyticsService : IAnalyticsService
         var command = connection.CreateCommand();
         command.CommandText = @"
             INSERT INTO track_plays (session_id, track_title, artist, album, source_app, played_at, duration_seconds, active_game)
-            VALUES (@sessionId, @title, @artist, @album, @sourceApp, @playedAt, @duration, @activeGame)
+            VALUES (@sessionId, @title, @artist, @album, @sourceApp, @playedAt, @duration, @activeGame);
+            SELECT last_insert_rowid();
         ";
         command.Parameters.AddWithValue("@sessionId", _currentSessionId > 0 ? _currentSessionId : DBNull.Value);
         command.Parameters.AddWithValue("@title", media.Title ?? (object)DBNull.Value);
@@ -176,10 +190,32 @@ public class AnalyticsService : IAnalyticsService
         command.Parameters.AddWithValue("@album", media.Album ?? (object)DBNull.Value);
         command.Parameters.AddWithValue("@sourceApp", media.SourceApp ?? (object)DBNull.Value);
         command.Parameters.AddWithValue("@playedAt", DateTime.Now.ToString("o"));
-        command.Parameters.AddWithValue("@duration", (int)media.Duration.TotalSeconds);
+        command.Parameters.AddWithValue("@duration", 0); // Start with 0, will update when track changes
         command.Parameters.AddWithValue("@activeGame", GetActiveWindowTitle() ?? (object)DBNull.Value);
 
+        _currentTrackPlayId = Convert.ToInt32(command.ExecuteScalar());
+    }
+
+    private void FinalizeCurrentTrack()
+    {
+        if (_currentTrackPlayId <= 0) return;
+
+        var actualDuration = (int)(DateTime.Now - _currentTrackStartTime).TotalSeconds;
+        
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = @"
+            UPDATE track_plays 
+            SET duration_seconds = @duration 
+            WHERE id = @trackId
+        ";
+        command.Parameters.AddWithValue("@duration", actualDuration);
+        command.Parameters.AddWithValue("@trackId", _currentTrackPlayId);
         command.ExecuteNonQuery();
+
+        _currentTrackPlayId = -1;
     }
 
     public DailyStats GetTodayStats()

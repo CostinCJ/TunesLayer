@@ -13,4 +13,5 @@ public interface IOverlayManager
     void SetClickThrough(bool enabled);
     void ToggleClickThrough();
     void SetPosition(double x, double y);
+    void ResetPosition();
 }

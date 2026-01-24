@@ -150,9 +150,17 @@ public partial class MainViewModel : ObservableObject
 
     private void LoadAnalytics()
     {
+        RefreshAnalytics();
+    }
+
+    public void RefreshAnalytics()
+    {
+        System.Diagnostics.Debug.WriteLine("RefreshAnalytics called");
         var stats = _analyticsService.GetTodayStats();
+        System.Diagnostics.Debug.WriteLine($"Stats: {stats.TotalListeningTime}, {stats.TracksPlayed}");
         TodayListeningTime = FormatDuration(stats.TotalListeningTime);
         TracksPlayedToday = stats.TracksPlayed;
+        System.Diagnostics.Debug.WriteLine($"Updated: TodayListeningTime={TodayListeningTime}, TracksPlayedToday={TracksPlayedToday}");
     }
 
     private static string FormatDuration(TimeSpan duration)
@@ -293,6 +301,15 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void OpenAnalytics()
     {
-        // Open analytics window (to be implemented)
+        var analyticsWindow = new Views.AnalyticsWindow();
+        analyticsWindow.Owner = Application.Current.MainWindow;
+        analyticsWindow.Show();
+    }
+
+    [RelayCommand]
+    private void ResetOverlayPosition()
+    {
+        _overlayManager.ResetPosition();
+        _overlayManager.Show(); // Show the overlay so user can see where it is
     }
 }

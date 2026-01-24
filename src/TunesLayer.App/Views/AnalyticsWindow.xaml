@@ -23,7 +23,7 @@
                        FontSize="24" 
                        FontWeight="Bold"
                        Foreground="{DynamicResource PrimaryBrush}" />
-            <TextBlock Text="Track your music habits while gaming" 
+            <TextBlock Text="Track your music habits" 
                        FontSize="14" 
                        Foreground="{DynamicResource SecondaryTextBrush}"
                        Margin="0,5,0,0" />
@@ -80,7 +80,7 @@
                     <TextBlock x:Name="SessionsText" Text="0" 
                                FontSize="28" FontWeight="Bold"
                                Foreground="{DynamicResource ForegroundBrush}" />
-                    <TextBlock Text="gaming sessions" 
+                    <TextBlock Text="listening sessions" 
                                Foreground="{DynamicResource SecondaryTextBrush}"
                                FontSize="11" />
                 </StackPanel>
@@ -166,27 +166,27 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="0,5">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <TextBlock Text="{Binding TrackTitle}" 
+                                <StackPanel Margin="0,5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding TrackTitle}" 
                                                    Foreground="{DynamicResource ForegroundBrush}"
                                                    TextTrimming="CharacterEllipsis"
                                                    FontSize="13" />
-                                        <TextBlock Text="{Binding Artist}" 
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="{Binding PlayedAtFormatted}"
                                                    Foreground="{DynamicResource SecondaryTextBrush}"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   FontSize="11" />
-                                    </StackPanel>
-                                    <TextBlock Grid.Column="1" 
-                                               Text="{Binding PlayedAtFormatted}"
+                                                   FontSize="10" Margin="8,0,0,0"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                    <TextBlock Text="{Binding Artist}" 
                                                Foreground="{DynamicResource SecondaryTextBrush}"
-                                               FontSize="11"
-                                               VerticalAlignment="Center" />
-                                </Grid>
+                                               TextTrimming="CharacterEllipsis"
+                                               FontSize="11" />
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

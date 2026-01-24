@@ -130,6 +130,9 @@ public class MediaSessionService : IMediaSessionService
                 }
             }
 
+            // Update timeline to get current duration before creating MediaInfo
+            UpdateTimelineBaseline();
+
             CurrentMedia = new MediaInfo
             {
                 Title = mediaProperties.Title,
@@ -137,7 +140,8 @@ public class MediaSessionService : IMediaSessionService
                 Album = mediaProperties.AlbumTitle,
                 AlbumArtData = albumArtData,
                 SourceApp = GetSourceAppName(),
-                TrackId = $"{mediaProperties.Artist}_{mediaProperties.Title}"
+                TrackId = $"{mediaProperties.Artist}_{mediaProperties.Title}",
+                Duration = _duration
             };
 
             MediaChanged?.Invoke(this, CurrentMedia);

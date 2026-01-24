@@ -7,21 +7,25 @@ public class OverlayManager : IOverlayManager
 {
     private readonly ISettingsService _settingsService;
     private readonly IMediaSessionService _mediaService;
+    private readonly IAnalyticsService _analyticsService;
     private OverlayWindow? _overlayWindow;
+    
+    public Action<string, string>? ShowNotificationCallback { get; set; }
 
     public bool IsVisible => _overlayWindow?.IsVisible ?? false;
 
-    public OverlayManager(ISettingsService settingsService, IMediaSessionService mediaService)
+    public OverlayManager(ISettingsService settingsService, IMediaSessionService mediaService, IAnalyticsService analyticsService)
     {
         _settingsService = settingsService;
         _mediaService = mediaService;
+        _analyticsService = analyticsService;
     }
 
     public void Initialize()
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
-            _overlayWindow = new OverlayWindow(_mediaService, _settingsService);
+            _overlayWindow = new OverlayWindow(_mediaService, _settingsService, _analyticsService, ShowNotificationCallback);
             
             // Apply saved settings
             // Note: opacity and click-through are applied in Window_Loaded after the hwnd is available
@@ -121,6 +125,26 @@ public class OverlayManager : IOverlayManager
             {
                 _overlayWindow.Left = x;
                 _overlayWindow.Top = y;
+            }
+        });
+    }
+
+    public void ResetPosition()
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            if (_overlayWindow != null)
+            {
+                // Center on screen
+                var screenWidth = SystemParameters.PrimaryScreenWidth;
+                var screenHeight = SystemParameters.PrimaryScreenHeight;
+                _overlayWindow.Left = (screenWidth - _overlayWindow.Width) / 2;
+                _overlayWindow.Top = (screenHeight - _overlayWindow.Height) / 2;
+                
+                // Save position
+                _settingsService.CurrentSettings.OverlayX = _overlayWindow.Left;
+                _settingsService.CurrentSettings.OverlayY = _overlayWindow.Top;
+                _ = _settingsService.SaveAsync();
             }
         });
     }

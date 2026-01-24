@@ -11,8 +11,17 @@ public partial class App : Application
 {
     private readonly ServiceProvider _serviceProvider;
     private System.Windows.Forms.NotifyIcon? _notifyIcon;
+    private static System.Windows.Forms.NotifyIcon? _staticNotifyIcon;
 
     public static IServiceProvider Services { get; private set; } = null!;
+
+    public static void ShowBalloonTip(string title, string text, int timeoutMs = 2000)
+    {
+        if (_staticNotifyIcon != null)
+        {
+            _staticNotifyIcon.ShowBalloonTip(timeoutMs, title, text, System.Windows.Forms.ToolTipIcon.Info);
+        }
+    }
 
     public App()
     {
@@ -74,6 +83,10 @@ public partial class App : Application
         
         // Initialize overlay first so we can register hotkey for it
         var overlayManager = _serviceProvider.GetRequiredService<IOverlayManager>();
+        if (overlayManager is Overlay.OverlayManager om)
+        {
+            om.ShowNotificationCallback = (title, text) => ShowBalloonTip(title, text, 3000);
+        }
         overlayManager.Initialize();
         hotkeyService.RegisterHotkey("ToggleOverlay", settings.HotkeyToggleOverlay, () => overlayManager.Toggle());
         hotkeyService.RegisterHotkey("ToggleClickThrough", settings.HotkeyToggleClickThrough, () => overlayManager.ToggleClickThrough());
@@ -107,6 +120,7 @@ public partial class App : Application
             Visible = true,
             Text = "TunesLayer"
         };
+        _staticNotifyIcon = _notifyIcon;
 
         var contextMenu = new System.Windows.Forms.ContextMenuStrip();
         contextMenu.Items.Add("Show Overlay", null, (s, e) => ShowOverlay());

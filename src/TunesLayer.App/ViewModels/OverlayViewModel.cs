@@ -12,11 +12,13 @@ public partial class OverlayViewModel : ObservableObject
 {
     private readonly IMediaSessionService _mediaService;
     private readonly IAnalyticsService _analyticsService;
+    private readonly ISettingsService _settingsService;
 
     public OverlayViewModel()
     {
         _mediaService = App.Services.GetRequiredService<IMediaSessionService>();
         _analyticsService = App.Services.GetRequiredService<IAnalyticsService>();
+        _settingsService = App.Services.GetRequiredService<ISettingsService>();
 
         _mediaService.MediaChanged += OnMediaChanged;
         _mediaService.PlaybackStateChanged += OnPlaybackStateChanged;
@@ -88,6 +90,12 @@ public partial class OverlayViewModel : ObservableObject
 
             // Track for analytics
             _analyticsService.TrackMediaPlayed(media);
+
+            // Show notification if enabled
+            if (_settingsService.CurrentSettings.ShowNotifications)
+            {
+                ShowTrackChangeNotification(media);
+            }
         });
     }
 
@@ -141,6 +149,20 @@ public partial class OverlayViewModel : ObservableObject
             "deezer" => "\uE8D6",
             _ => "\uE8D6" // Default music icon
         };
+    }
+
+    private void ShowTrackChangeNotification(MediaInfo media)
+    {
+        try
+        {
+            var title = media.Title ?? "Unknown Track";
+            var text = media.Artist ?? "Unknown Artist";
+            App.ShowBalloonTip(title, text, 3000);
+        }
+        catch
+        {
+            // Silently fail if notifications aren't supported
+        }
     }
 
     [RelayCommand]

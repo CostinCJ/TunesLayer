@@ -32,6 +32,8 @@ public partial class OverlayWindow : Window
 
     private readonly IMediaSessionService _mediaService;
     private readonly ISettingsService _settingsService;
+    private readonly IAnalyticsService _analyticsService;
+    private readonly Action<string, string>? _showNotification;
     private IntPtr _hwnd;
     private bool _isClickThrough;
     private bool _isDragging;
@@ -39,14 +41,21 @@ public partial class OverlayWindow : Window
 
     public bool IsClickThrough => _isClickThrough;
 
-    public OverlayWindow(IMediaSessionService mediaService, ISettingsService settingsService)
+    public OverlayWindow(IMediaSessionService mediaService, ISettingsService settingsService, 
+        IAnalyticsService analyticsService, Action<string, string>? showNotification = null)
     {
         InitializeComponent();
         _mediaService = mediaService;
         _settingsService = settingsService;
+        _analyticsService = analyticsService;
+        _showNotification = showNotification;
 
-        // Setup data binding
-        DataContext = new OverlayViewModel(mediaService);
+        // Setup data binding - pass analytics service and notification action
+        DataContext = new OverlayViewModel(
+            mediaService, 
+            settingsService, 
+            analyticsService,
+            showNotification);
 
         // Subscribe to playback state changes for icon updates
         _mediaService.PlaybackStateChanged += OnPlaybackStateChanged;
@@ -210,12 +219,20 @@ public partial class OverlayWindow : Window
 public class OverlayViewModel : System.ComponentModel.INotifyPropertyChanged
 {
     private readonly IMediaSessionService _mediaService;
+    private readonly ISettingsService _settingsService;
+    private readonly IAnalyticsService _analyticsService;
+    private readonly Action<string, string>? _showNotification;
 
     public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
 
-    public OverlayViewModel(IMediaSessionService mediaService)
+    public OverlayViewModel(IMediaSessionService mediaService, ISettingsService settingsService, 
+        IAnalyticsService analyticsService, Action<string, string>? showNotification = null)
     {
         _mediaService = mediaService;
+        _settingsService = settingsService;
+        _analyticsService = analyticsService;
+        _showNotification = showNotification;
+        
         _mediaService.MediaChanged += OnMediaChanged;
         _mediaService.TimelineChanged += OnTimelineChanged;
 
@@ -330,6 +347,19 @@ public class OverlayViewModel : System.ComponentModel.INotifyPropertyChanged
         else
         {
             AlbumArt = null;
+        }
+
+        // Track for analytics
+        _analyticsService.TrackMediaPlayed(media);
+
+        // Show notification if enabled
+        if (_settingsService.CurrentSettings.ShowNotifications && _showNotification != null)
+        {
+            try
+            {
+                _showNotification(media.Title ?? "Unknown Track", media.Artist ?? "Unknown Artist");
+            }
+            catch { }
         }
     }
 

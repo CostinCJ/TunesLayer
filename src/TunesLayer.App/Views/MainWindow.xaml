@@ -166,7 +166,14 @@
                                 <CheckBox Content="Enable click-through mode" IsChecked="{Binding ClickThroughEnabled}"
                                           Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,10" />
                                 <CheckBox Content="Show track change notifications" IsChecked="{Binding ShowNotifications}"
-                                          Foreground="{DynamicResource ForegroundBrush}" />
+                                          Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,15" />
+                                
+                                <Button Content="Reset Overlay Position" Command="{Binding ResetOverlayPositionCommand}"
+                                        Padding="12,8" HorizontalAlignment="Left"
+                                        Background="{DynamicResource BackgroundBrush}"
+                                        Foreground="{DynamicResource ForegroundBrush}"
+                                        BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}"
+                                        Cursor="Hand" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -385,10 +392,18 @@
                         <TextBlock Text="Analytics" />
                     </StackPanel>
                 </TabItem.Header>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" IsVisibleChanged="AnalyticsTab_IsVisibleChanged">
                     <StackPanel Margin="30,20">
-                        <TextBlock Text="Listening Statistics" FontWeight="SemiBold" FontSize="15"
-                                   Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,5" />
+                        <Grid Margin="0,0,0,15">
+                            <TextBlock Text="Listening Statistics" FontWeight="SemiBold" FontSize="15"
+                                       Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center" />
+                            <Button Content="🔄 Refresh" Click="RefreshAnalytics_Click" 
+                                    Padding="8,4" HorizontalAlignment="Right"
+                                    Background="{DynamicResource CardBackgroundBrush}"
+                                    Foreground="{DynamicResource ForegroundBrush}"
+                                    BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}"
+                                    Cursor="Hand" />
+                        </Grid>
                         <TextBlock Text="Track your music listening habits"
                                    FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" 
                                    Margin="0,0,0,15" TextWrapping="Wrap" />

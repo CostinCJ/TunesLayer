@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using TunesLayer.App.ViewModels;
@@ -30,6 +31,28 @@ public partial class MainWindow : Window
             {
                 viewModel.SelectedTheme = theme;
             }
+        }
+    }
+
+    
+    private void AnalyticsTab_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        if (sender is ScrollViewer scrollViewer && scrollViewer.IsVisible)
+        {
+            System.Diagnostics.Debug.WriteLine("Analytics tab became visible, refreshing...");
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.RefreshAnalytics();
+            }
+        }
+    }
+
+    private void RefreshAnalytics_Click(object sender, RoutedEventArgs e)
+    {
+        System.Diagnostics.Debug.WriteLine("Refresh button clicked");
+        if (DataContext is MainViewModel viewModel)
+        {
+            viewModel.RefreshAnalytics();
         }
     }
 }
