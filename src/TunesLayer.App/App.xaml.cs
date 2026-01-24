@@ -39,6 +39,7 @@ public partial class App : Application
         services.AddSingleton<IHotkeyService, HotkeyService>();
         services.AddSingleton<IAnalyticsService, AnalyticsService>();
         services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IVolumeService, VolumeService>();
 
         // Overlay
         services.AddSingleton<IOverlayManager, OverlayManager>();
@@ -80,6 +81,11 @@ public partial class App : Application
         hotkeyService.RegisterHotkey("PlayPause", settings.HotkeyPlayPause, async () => await mediaService.PlayPauseAsync());
         hotkeyService.RegisterHotkey("Next", settings.HotkeyNext, async () => await mediaService.NextAsync());
         hotkeyService.RegisterHotkey("Previous", settings.HotkeyPrevious, async () => await mediaService.PreviousAsync());
+        
+        // Volume control hotkeys
+        var volumeService = _serviceProvider.GetRequiredService<IVolumeService>();
+        hotkeyService.RegisterHotkey("VolumeUp", settings.HotkeyVolumeUp, () => volumeService.IncreaseVolume());
+        hotkeyService.RegisterHotkey("VolumeDown", settings.HotkeyVolumeDown, () => volumeService.DecreaseVolume());
         
         // Initialize overlay first so we can register hotkey for it
         var overlayManager = _serviceProvider.GetRequiredService<IOverlayManager>();

@@ -92,6 +92,12 @@ public partial class MainViewModel : ObservableObject
     private string _hotkeyPrevious = "Ctrl+Alt+Left";
 
     [ObservableProperty]
+    private string _hotkeyVolumeUp = "Ctrl+Alt+Up";
+
+    [ObservableProperty]
+    private string _hotkeyVolumeDown = "Ctrl+Alt+Down";
+
+    [ObservableProperty]
     private string _hotkeyToggleOverlay = "Ctrl+Alt+O";
 
     [ObservableProperty]
@@ -131,6 +137,8 @@ public partial class MainViewModel : ObservableObject
         HotkeyPlayPause = settings.HotkeyPlayPause;
         HotkeyNext = settings.HotkeyNext;
         HotkeyPrevious = settings.HotkeyPrevious;
+        HotkeyVolumeUp = settings.HotkeyVolumeUp;
+        HotkeyVolumeDown = settings.HotkeyVolumeDown;
         HotkeyToggleOverlay = settings.HotkeyToggleOverlay;
         HotkeyToggleClickThrough = settings.HotkeyToggleClickThrough;
         DiscordEnabled = settings.DiscordEnabled;

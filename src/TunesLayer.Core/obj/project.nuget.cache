@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "IkmkAJfEdfc=",
+  "dgSpecHash": "/kHUzPXPS4c=",
   "success": true,
   "projectFilePath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Costin\\.nuget\\packages\\audioswitcher.audioapi\\3.0.0\\audioswitcher.audioapi.3.0.0.nupkg.sha512",
+    "C:\\Users\\Costin\\.nuget\\packages\\audioswitcher.audioapi.coreaudio\\3.0.3\\audioswitcher.audioapi.coreaudio.3.0.3.nupkg.sha512",
     "C:\\Users\\Costin\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.2\\communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "C:\\Users\\Costin\\.nuget\\packages\\microsoft.data.sqlite\\8.0.11\\microsoft.data.sqlite.8.0.11.nupkg.sha512",
     "C:\\Users\\Costin\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.11\\microsoft.data.sqlite.core.8.0.11.nupkg.sha512",

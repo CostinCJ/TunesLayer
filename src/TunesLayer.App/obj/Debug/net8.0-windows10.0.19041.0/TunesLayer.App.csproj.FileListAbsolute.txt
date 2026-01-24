@@ -68,3 +68,5 @@ D:\Tuneify\Tuneify\src\TunesLayer.App\obj\Debug\net8.0-windows10.0.19041.0\refin
 D:\Tuneify\Tuneify\src\TunesLayer.App\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.pdb
 D:\Tuneify\Tuneify\src\TunesLayer.App\obj\Debug\net8.0-windows10.0.19041.0\TunesLayer.App.genruntimeconfig.cache
 D:\Tuneify\Tuneify\src\TunesLayer.App\obj\Debug\net8.0-windows10.0.19041.0\ref\TunesLayer.dll
+D:\Tuneify\Tuneify\src\TunesLayer.App\bin\Debug\net8.0-windows10.0.19041.0\AudioSwitcher.AudioApi.dll
+D:\Tuneify\Tuneify\src\TunesLayer.App\bin\Debug\net8.0-windows10.0.19041.0\AudioSwitcher.AudioApi.CoreAudio.dll

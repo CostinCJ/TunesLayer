@@ -1,3 +1,12 @@
+# TunesLayer - Dual License
+
+TunesLayer is available under a **dual licensing model**:
+
+## 1. Open Source License (MIT) - Core Features
+
+The **core functionality** of TunesLayer is licensed under the MIT License:
+
+```
 MIT License
 
 Copyright (c) 2026 TunesLayer
@@ -19,3 +28,60 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
+
+### Core Features (MIT Licensed)
+- Windows Media Session (SMTC) integration
+- Basic overlay window with transparency
+- Global hotkey system
+- System tray integration
+- Settings persistence
+- 2 basic themes (Midnight, Minimal)
+
+---
+
+## 2. Proprietary License - Premium Features
+
+**Premium features** are proprietary and require a paid license:
+
+### Pro Features (Proprietary)
+- Additional themes (Neon, Glassmorphism, Retro)
+- Analytics dashboard and data visualization
+- Discord Rich Presence integration
+- OBS Now Playing widget
+
+### Pro+ Features (Proprietary)
+- Custom theme creator
+- Theme import/export
+- Priority support
+
+**License Terms**: Premium features are subject to the [End User License Agreement (EULA)](EULA.md).
+
+---
+
+## Why Dual Licensing?
+
+This model allows us to:
+- Keep the core technology **open source** for transparency and community contributions
+- Fund ongoing development through **premium features**
+- Ensure the basic functionality remains **free and accessible** to everyone
+
+---
+
+## For Developers
+
+### Contributing
+- Contributions to core features are welcome under the MIT License
+- Contributors retain copyright to their contributions
+- By contributing, you agree to license your contributions under MIT
+
+### Forking
+- You may fork the core (MIT-licensed) components
+- Premium features are proprietary and may not be included in forks
+- See `CONTRIBUTING.md` for guidelines
+
+---
+
+## Questions?
+
+For licensing questions, contact: licensing@tuneslayer.com

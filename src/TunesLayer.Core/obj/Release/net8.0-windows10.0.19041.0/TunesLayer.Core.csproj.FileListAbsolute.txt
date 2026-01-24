@@ -1,0 +1,13 @@
+D:\Tuneify\Tuneify\src\TunesLayer.Core\bin\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.deps.json
+D:\Tuneify\Tuneify\src\TunesLayer.Core\bin\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Core\bin\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.pdb
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.csproj.AssemblyReference.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.AssemblyInfoInputs.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.AssemblyInfo.cs
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.csproj.CoreCompileInputs.cache
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.sourcelink.json
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\refint\TunesLayer.Core.dll
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\TunesLayer.Core.pdb
+D:\Tuneify\Tuneify\src\TunesLayer.Core\obj\Release\net8.0-windows10.0.19041.0\ref\TunesLayer.Core.dll

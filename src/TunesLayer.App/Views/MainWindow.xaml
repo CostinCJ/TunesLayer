@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TunesLayer.App.ViewModels"
+        xmlns:converters="clr-namespace:TunesLayer.App.Converters"
         mc:Ignorable="d"
         Title="TunesLayer - Settings"
         Height="650" Width="520"
@@ -16,6 +17,8 @@
     </Window.DataContext>
     
     <Window.Resources>
+        <converters:EqualityConverter x:Key="EqualityConverter" />
+        
         <!-- TabControl style with fixed 2-row grid layout -->
         <Style TargetType="TabControl">
             <Setter Property="Template">
@@ -247,6 +250,36 @@
                                     </Border>
                                 </Grid>
                                 
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="160" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Volume Up" Foreground="{DynamicResource ForegroundBrush}" 
+                                               VerticalAlignment="Center" />
+                                    <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" 
+                                            CornerRadius="4" Padding="10,6">
+                                        <TextBlock Text="{Binding HotkeyVolumeUp}" 
+                                                   Foreground="{DynamicResource ForegroundBrush}"
+                                                   TextAlignment="Center" FontFamily="Consolas" />
+                                    </Border>
+                                </Grid>
+                                
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="160" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Volume Down" Foreground="{DynamicResource ForegroundBrush}" 
+                                               VerticalAlignment="Center" />
+                                    <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" 
+                                            CornerRadius="4" Padding="10,6">
+                                        <TextBlock Text="{Binding HotkeyVolumeDown}" 
+                                                   Foreground="{DynamicResource ForegroundBrush}"
+                                                   TextAlignment="Center" FontFamily="Consolas" />
+                                    </Border>
+                                </Grid>
+                                
                                 <!-- Overlay Controls -->
                                 <TextBlock Text="Overlay Controls" FontWeight="Medium" FontSize="13"
                                            Foreground="{DynamicResource SecondaryTextBrush}" Margin="0,0,0,10" />
@@ -306,10 +339,28 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Padding="16,12" Margin="0,0,0,8" CornerRadius="8"
-                                            Background="{DynamicResource CardBackgroundBrush}"
                                             Cursor="Hand"
                                             MouseLeftButtonDown="ThemeItem_Click"
                                             Tag="{Binding}">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+                                                <Setter Property="BorderThickness" Value="2" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Value="True">
+                                                        <DataTrigger.Binding>
+                                                            <MultiBinding Converter="{StaticResource EqualityConverter}">
+                                                                <Binding Path="Id" />
+                                                                <Binding Path="DataContext.SelectedTheme.Id" 
+                                                                         RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                            </MultiBinding>
+                                                        </DataTrigger.Binding>
+                                                        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
                                         <StackPanel>
                                             <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14"
                                                        Foreground="{DynamicResource ForegroundBrush}" />
@@ -394,16 +445,8 @@
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" IsVisibleChanged="AnalyticsTab_IsVisibleChanged">
                     <StackPanel Margin="30,20">
-                        <Grid Margin="0,0,0,15">
-                            <TextBlock Text="Listening Statistics" FontWeight="SemiBold" FontSize="15"
-                                       Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center" />
-                            <Button Content="🔄 Refresh" Click="RefreshAnalytics_Click" 
-                                    Padding="8,4" HorizontalAlignment="Right"
-                                    Background="{DynamicResource CardBackgroundBrush}"
-                                    Foreground="{DynamicResource ForegroundBrush}"
-                                    BorderThickness="1" BorderBrush="{DynamicResource BorderBrush}"
-                                    Cursor="Hand" />
-                        </Grid>
+                        <TextBlock Text="Listening Statistics" FontWeight="SemiBold" FontSize="15"
+                                   Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,15" />
                         <TextBlock Text="Track your music listening habits"
                                    FontSize="12" Foreground="{DynamicResource SecondaryTextBrush}" 
                                    Margin="0,0,0,15" TextWrapping="Wrap" />

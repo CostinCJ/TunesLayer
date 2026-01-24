@@ -2,6 +2,27 @@
   "version": 3,
   "targets": {
     "net8.0-windows10.0.19041": {
+      "AudioSwitcher.AudioApi/3.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/AudioSwitcher.AudioApi.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AudioSwitcher.AudioApi.dll": {}
+        }
+      },
+      "AudioSwitcher.AudioApi.CoreAudio/3.0.3": {
+        "type": "package",
+        "dependencies": {
+          "AudioSwitcher.AudioApi": "3.0.0"
+        },
+        "compile": {
+          "lib/net452/AudioSwitcher.AudioApi.CoreAudio.dll": {}
+        },
+        "runtime": {
+          "lib/net452/AudioSwitcher.AudioApi.CoreAudio.dll": {}
+        }
+      },
       "CommunityToolkit.Mvvm/8.2.2": {
         "type": "package",
         "compile": {
@@ -206,6 +227,33 @@
     }
   },
   "libraries": {
+    "AudioSwitcher.AudioApi/3.0.0": {
+      "sha512": "AiYO8fCawsu/v6rZgDWta55GYzh9vs/FocW9xKhEGF3xsUJIgPaVsWeeBwoexMttueW6E8RS0Vp0o8w8dodjyQ==",
+      "type": "package",
+      "path": "audioswitcher.audioapi/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "audioswitcher.audioapi.3.0.0.nupkg.sha512",
+        "audioswitcher.audioapi.nuspec",
+        "lib/net40/AudioSwitcher.AudioApi.dll"
+      ]
+    },
+    "AudioSwitcher.AudioApi.CoreAudio/3.0.3": {
+      "sha512": "O0XrFLuND0Ti/UmW24PvX36Tfhify6jOBpuIKw0wmWemzKQ6fS1uH36a+bNRny9LdqPGIQnFfDyieLo1otb/Lw==",
+      "type": "package",
+      "path": "audioswitcher.audioapi.coreaudio/3.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "audioswitcher.audioapi.coreaudio.3.0.3.nupkg.sha512",
+        "audioswitcher.audioapi.coreaudio.nuspec",
+        "lib/net40/AudioSwitcher.AudioApi.CoreAudio.dll",
+        "lib/net452/AudioSwitcher.AudioApi.CoreAudio.dll",
+        "lib/net472/AudioSwitcher.AudioApi.CoreAudio.dll",
+        "lib/net48/AudioSwitcher.AudioApi.CoreAudio.dll"
+      ]
+    },
     "CommunityToolkit.Mvvm/8.2.2": {
       "sha512": "r0g0k9tGYdrnz8R7T3x5UiokDffeevzK/2P/9SBL6fqLgN8B157MIi/bVUWI1KAz6ZorZrK9AdABCWUeXZZsvA==",
       "type": "package",
@@ -456,6 +504,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows10.0.19041": [
+      "AudioSwitcher.AudioApi.CoreAudio >= 3.0.3",
       "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Data.Sqlite >= 8.0.11",
       "System.Text.Json >= 8.0.5"
@@ -489,6 +538,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU1701"
+        ],
         "warnAsError": [
           "NU1605"
         ]
@@ -503,6 +555,10 @@
       "net8.0-windows10.0.19041": {
         "targetAlias": "net8.0-windows10.0.19041.0",
         "dependencies": {
+          "AudioSwitcher.AudioApi.CoreAudio": {
+            "target": "Package",
+            "version": "[3.0.3, )"
+          },
           "CommunityToolkit.Mvvm": {
             "target": "Package",
             "version": "[8.2.2, )"
