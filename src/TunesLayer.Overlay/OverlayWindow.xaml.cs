@@ -141,9 +141,11 @@ public partial class OverlayWindow : Window
         // Allow dragging the window
         if (e.ButtonState == MouseButtonState.Pressed)
         {
+            _isDragging = true;
             DragMove();
+            _isDragging = false;
 
-            // Save new position
+            // Save position after drag completes (DragMove blocks until mouse is released)
             _settingsService.CurrentSettings.OverlayX = Left;
             _settingsService.CurrentSettings.OverlayY = Top;
             _ = _settingsService.SaveAsync();

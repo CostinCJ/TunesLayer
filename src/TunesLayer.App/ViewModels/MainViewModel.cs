@@ -16,6 +16,9 @@ public partial class MainViewModel : ObservableObject
     private readonly IOverlayManager _overlayManager;
     private readonly IThemeService _themeService;
     private readonly IAnalyticsService _analyticsService;
+    private readonly IHotkeyService _hotkeyService;
+    private readonly IMediaSessionService _mediaService;
+    private bool _isLoadingSettings;
 
     public MainViewModel()
     {
@@ -23,10 +26,14 @@ public partial class MainViewModel : ObservableObject
         _overlayManager = App.Services.GetRequiredService<IOverlayManager>();
         _themeService = App.Services.GetRequiredService<IThemeService>();
         _analyticsService = App.Services.GetRequiredService<IAnalyticsService>();
+        _hotkeyService = App.Services.GetRequiredService<IHotkeyService>();
+        _mediaService = App.Services.GetRequiredService<IMediaSessionService>();
 
+        _isLoadingSettings = true;
         LoadSettings();
         LoadThemes();
         LoadAnalytics();
+        _isLoadingSettings = false;
     }
 
     // General Settings
@@ -92,10 +99,14 @@ public partial class MainViewModel : ObservableObject
         StartWithWindows = settings.StartWithWindows;
         StartMinimized = settings.StartMinimized;
         ShowOverlayOnStartup = settings.ShowOverlayOnStartup;
-        OverlayOpacity = settings.OverlayOpacity;
-        OverlaySize = settings.OverlaySize;
+        OverlayOpacity = settings.OverlayOpacity > 0 ? settings.OverlayOpacity : 0.9;
+        OverlaySize = settings.OverlaySize > 0 ? settings.OverlaySize : 250;
         ClickThroughEnabled = settings.ClickThroughEnabled;
         ShowNotifications = settings.ShowNotifications;
+        HotkeyPlayPause = settings.HotkeyPlayPause;
+        HotkeyNext = settings.HotkeyNext;
+        HotkeyPrevious = settings.HotkeyPrevious;
+        HotkeyToggleOverlay = settings.HotkeyToggleOverlay;
         DiscordEnabled = settings.DiscordEnabled;
         OBSWidgetEnabled = settings.OBSWidgetEnabled;
     }
@@ -103,8 +114,15 @@ public partial class MainViewModel : ObservableObject
     private void LoadThemes()
     {
         AvailableThemes = new ObservableCollection<ThemeInfo>(_themeService.GetAvailableThemes());
-        SelectedTheme = AvailableThemes.FirstOrDefault(t => t.Id == _settingsService.CurrentSettings.SelectedTheme)
+        var savedThemeId = _settingsService.CurrentSettings.SelectedTheme;
+        SelectedTheme = AvailableThemes.FirstOrDefault(t => t.Id == savedThemeId)
                         ?? AvailableThemes.FirstOrDefault();
+        
+        // Apply theme if it was saved (but don't save again during load)
+        if (!string.IsNullOrEmpty(savedThemeId) && SelectedTheme != null)
+        {
+            _themeService.ApplyTheme(savedThemeId);
+        }
     }
 
     private void LoadAnalytics()
@@ -123,7 +141,7 @@ public partial class MainViewModel : ObservableObject
 
     partial void OnSelectedThemeChanged(ThemeInfo? value)
     {
-        if (value != null)
+        if (value != null && !_isLoadingSettings)
         {
             _themeService.ApplyTheme(value.Id);
             _settingsService.CurrentSettings.SelectedTheme = value.Id;
@@ -133,16 +151,22 @@ public partial class MainViewModel : ObservableObject
 
     partial void OnOverlayOpacityChanged(double value)
     {
-        _settingsService.CurrentSettings.OverlayOpacity = value;
-        _overlayManager.UpdateOpacity(value);
-        _settingsService.SaveAsync();
+        if (!_isLoadingSettings)
+        {
+            _settingsService.CurrentSettings.OverlayOpacity = value;
+            _overlayManager.UpdateOpacity(value);
+            _settingsService.SaveAsync();
+        }
     }
 
     partial void OnOverlaySizeChanged(double value)
     {
-        _settingsService.CurrentSettings.OverlaySize = value;
-        _overlayManager.UpdateSize(value);
-        _settingsService.SaveAsync();
+        if (!_isLoadingSettings)
+        {
+            _settingsService.CurrentSettings.OverlaySize = value;
+            _overlayManager.UpdateSize(value);
+            _settingsService.SaveAsync();
+        }
     }
 
     partial void OnClickThroughEnabledChanged(bool value)
@@ -150,6 +174,77 @@ public partial class MainViewModel : ObservableObject
         _settingsService.CurrentSettings.ClickThroughEnabled = value;
         _overlayManager.SetClickThrough(value);
         _settingsService.SaveAsync();
+    }
+
+    partial void OnStartWithWindowsChanged(bool value)
+    {
+        _settingsService.CurrentSettings.StartWithWindows = value;
+        _settingsService.SaveAsync();
+        // TODO: Implement Windows startup registry entry
+    }
+
+    partial void OnStartMinimizedChanged(bool value)
+    {
+        _settingsService.CurrentSettings.StartMinimized = value;
+        _settingsService.SaveAsync();
+    }
+
+    partial void OnShowOverlayOnStartupChanged(bool value)
+    {
+        _settingsService.CurrentSettings.ShowOverlayOnStartup = value;
+        _settingsService.SaveAsync();
+    }
+
+    partial void OnShowNotificationsChanged(bool value)
+    {
+        _settingsService.CurrentSettings.ShowNotifications = value;
+        _settingsService.SaveAsync();
+    }
+
+    partial void OnHotkeyPlayPauseChanged(string value)
+    {
+        if (_isLoadingSettings) return;
+        _settingsService.CurrentSettings.HotkeyPlayPause = value;
+        _settingsService.SaveAsync();
+        _hotkeyService.RegisterHotkey("PlayPause", value, async () => await _mediaService.PlayPauseAsync());
+    }
+
+    partial void OnHotkeyNextChanged(string value)
+    {
+        if (_isLoadingSettings) return;
+        _settingsService.CurrentSettings.HotkeyNext = value;
+        _settingsService.SaveAsync();
+        _hotkeyService.RegisterHotkey("Next", value, async () => await _mediaService.NextAsync());
+    }
+
+    partial void OnHotkeyPreviousChanged(string value)
+    {
+        if (_isLoadingSettings) return;
+        _settingsService.CurrentSettings.HotkeyPrevious = value;
+        _settingsService.SaveAsync();
+        _hotkeyService.RegisterHotkey("Previous", value, async () => await _mediaService.PreviousAsync());
+    }
+
+    partial void OnHotkeyToggleOverlayChanged(string value)
+    {
+        if (_isLoadingSettings) return;
+        _settingsService.CurrentSettings.HotkeyToggleOverlay = value;
+        _settingsService.SaveAsync();
+        _hotkeyService.RegisterHotkey("ToggleOverlay", value, () => _overlayManager.Toggle());
+    }
+
+    partial void OnDiscordEnabledChanged(bool value)
+    {
+        _settingsService.CurrentSettings.DiscordEnabled = value;
+        _settingsService.SaveAsync();
+        // TODO: Enable/disable Discord integration
+    }
+
+    partial void OnOBSWidgetEnabledChanged(bool value)
+    {
+        _settingsService.CurrentSettings.OBSWidgetEnabled = value;
+        _settingsService.SaveAsync();
+        // TODO: Enable/disable OBS widget server
     }
 
     [RelayCommand]

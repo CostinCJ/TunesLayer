@@ -52,22 +52,48 @@ public partial class App : Application
         var settingsService = _serviceProvider.GetRequiredService<ISettingsService>();
         await settingsService.LoadAsync();
 
+        // Apply saved theme on startup
+        var themeService = _serviceProvider.GetRequiredService<IThemeService>();
+        var savedTheme = settingsService.CurrentSettings.SelectedTheme;
+        if (!string.IsNullOrEmpty(savedTheme))
+        {
+            themeService.ApplyTheme(savedTheme);
+        }
+
         var mediaService = _serviceProvider.GetRequiredService<IMediaSessionService>();
         await mediaService.InitializeAsync();
 
         var hotkeyService = _serviceProvider.GetRequiredService<IHotkeyService>();
         hotkeyService.Initialize();
+        
+        // Register hotkeys from settings
+        var settings = settingsService.CurrentSettings;
+        hotkeyService.RegisterHotkey("PlayPause", settings.HotkeyPlayPause, async () => await mediaService.PlayPauseAsync());
+        hotkeyService.RegisterHotkey("Next", settings.HotkeyNext, async () => await mediaService.NextAsync());
+        hotkeyService.RegisterHotkey("Previous", settings.HotkeyPrevious, async () => await mediaService.PreviousAsync());
+        
+        // Initialize overlay first so we can register hotkey for it
+        var overlayManager = _serviceProvider.GetRequiredService<IOverlayManager>();
+        overlayManager.Initialize();
+        hotkeyService.RegisterHotkey("ToggleOverlay", settings.HotkeyToggleOverlay, () => overlayManager.Toggle());
 
         // Start analytics tracking
         var analyticsService = _serviceProvider.GetRequiredService<IAnalyticsService>();
         analyticsService.StartSession();
 
-        // Initialize overlay
-        var overlayManager = _serviceProvider.GetRequiredService<IOverlayManager>();
-        overlayManager.Initialize();
-
         // Setup system tray
         SetupSystemTray();
+
+        // Create and show main window after settings are loaded
+        // This ensures the ViewModel can access loaded settings
+        var mainWindow = new Views.MainWindow();
+        Current.MainWindow = mainWindow;
+        
+        // Show window based on startup settings
+        if (!settingsService.CurrentSettings.StartMinimized)
+        {
+            mainWindow.Show();
+        }
     }
 
     private void SetupSystemTray()

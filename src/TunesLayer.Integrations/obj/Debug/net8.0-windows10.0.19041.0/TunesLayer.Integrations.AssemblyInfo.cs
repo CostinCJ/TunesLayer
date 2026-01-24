@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TunesLayer.Integrations")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+142146f73e23a3cdbb6ad98bc32d74c1c0cbfc6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cef0b043f20116cbc20ad20ad2291de5f481500f")]
 [assembly: System.Reflection.AssemblyProductAttribute("TunesLayer.Integrations")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TunesLayer.Integrations")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
