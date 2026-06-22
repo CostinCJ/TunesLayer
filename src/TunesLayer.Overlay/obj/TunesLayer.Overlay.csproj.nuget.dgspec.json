@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {}
+    "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {}
   },
   "projects": {
-    "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
+    "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
+        "projectUniqueName": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
         "projectName": "TunesLayer.Core",
-        "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
+        "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
         "packagesPath": "C:\\Users\\Costin\\.nuget\\packages\\",
-        "outputPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\obj\\",
+        "outputPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Costin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -95,14 +95,14 @@
         }
       }
     },
-    "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {
+    "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj",
+        "projectUniqueName": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj",
         "projectName": "TunesLayer.Overlay",
-        "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj",
+        "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj",
         "packagesPath": "C:\\Users\\Costin\\.nuget\\packages\\",
-        "outputPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\obj\\",
+        "outputPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Costin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -117,8 +117,8 @@
           "net8.0-windows10.0.19041": {
             "targetAlias": "net8.0-windows10.0.19041.0",
             "projectReferences": {
-              "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
-                "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
+              "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
+                "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
               }
             }
           }

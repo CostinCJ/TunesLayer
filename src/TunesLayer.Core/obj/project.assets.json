@@ -516,11 +516,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
+      "projectUniqueName": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
       "projectName": "TunesLayer.Core",
-      "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
+      "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj",
       "packagesPath": "C:\\Users\\Costin\\.nuget\\packages\\",
-      "outputPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\obj\\",
+      "outputPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Costin\\AppData\\Roaming\\NuGet\\NuGet.Config"

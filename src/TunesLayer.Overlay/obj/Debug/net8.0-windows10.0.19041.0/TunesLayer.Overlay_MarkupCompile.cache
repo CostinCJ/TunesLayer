@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\Tuneify\Tuneify\src\TunesLayer.Overlay\obj\Debug\net8.0-windows10.0.19041.0\
+D:\TunesLayer\TunesLayer\src\TunesLayer.Overlay\obj\Debug\net8.0-windows10.0.19041.0\
 TunesLayer.Overlay
 none
 false
@@ -13,7 +13,7 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 11067674342
 
 61848472801
-208-659760953
+2081257959361
 OverlayWindow.xaml;
 
 False

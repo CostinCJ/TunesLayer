@@ -40,6 +40,7 @@ public partial class App : Application
         services.AddSingleton<IAnalyticsService, AnalyticsService>();
         services.AddSingleton<IThemeService, ThemeService>();
         services.AddSingleton<IVolumeService, VolumeService>();
+        services.AddSingleton<IStartupManager, StartupManager>();
 
         // Overlay
         services.AddSingleton<IOverlayManager, OverlayManager>();

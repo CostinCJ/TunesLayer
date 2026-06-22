@@ -1073,11 +1073,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.App\\TunesLayer.App.csproj",
+      "projectUniqueName": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.App\\TunesLayer.App.csproj",
       "projectName": "TunesLayer",
-      "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.App\\TunesLayer.App.csproj",
+      "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.App\\TunesLayer.App.csproj",
       "packagesPath": "C:\\Users\\Costin\\.nuget\\packages\\",
-      "outputPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.App\\obj\\",
+      "outputPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.App\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Costin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1092,14 +1092,14 @@
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "projectReferences": {
-            "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
-              "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
+            "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
+              "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
             },
-            "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj": {
-              "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj"
+            "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj": {
+              "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj"
             },
-            "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {
-              "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj"
+            "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj": {
+              "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Overlay\\TunesLayer.Overlay.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RoiQx+CAcrw=",
+  "dgSpecHash": "aGG7lFMrmm8=",
   "success": true,
-  "projectFilePath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.App\\TunesLayer.App.csproj",
+  "projectFilePath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.App\\TunesLayer.App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Costin\\.nuget\\packages\\audioswitcher.audioapi\\3.0.0\\audioswitcher.audioapi.3.0.0.nupkg.sha512",
     "C:\\Users\\Costin\\.nuget\\packages\\audioswitcher.audioapi.coreaudio\\3.0.3\\audioswitcher.audioapi.coreaudio.3.0.3.nupkg.sha512",

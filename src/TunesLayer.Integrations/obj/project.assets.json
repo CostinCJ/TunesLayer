@@ -833,11 +833,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj",
+      "projectUniqueName": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj",
       "projectName": "TunesLayer.Integrations",
-      "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj",
+      "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Integrations\\TunesLayer.Integrations.csproj",
       "packagesPath": "C:\\Users\\Costin\\.nuget\\packages\\",
-      "outputPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Integrations\\obj\\",
+      "outputPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Integrations\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Costin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -852,8 +852,8 @@
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "projectReferences": {
-            "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
-              "projectPath": "D:\\Tuneify\\Tuneify\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
+            "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj": {
+              "projectPath": "D:\\TunesLayer\\TunesLayer\\src\\TunesLayer.Core\\TunesLayer.Core.csproj"
             }
           }
         }

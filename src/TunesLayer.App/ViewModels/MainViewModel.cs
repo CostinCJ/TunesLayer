@@ -20,6 +20,7 @@ public partial class MainViewModel : ObservableObject
     private readonly IHotkeyService _hotkeyService;
     private readonly IMediaSessionService _mediaService;
     private readonly IDiscordRpcService _discordService;
+    private readonly IStartupManager _startupManager;
     private bool _isLoadingSettings;
 
     public MainViewModel()
@@ -31,6 +32,7 @@ public partial class MainViewModel : ObservableObject
         _hotkeyService = App.Services.GetRequiredService<IHotkeyService>();
         _mediaService = App.Services.GetRequiredService<IMediaSessionService>();
         _discordService = App.Services.GetRequiredService<IDiscordRpcService>();
+        _startupManager = App.Services.GetRequiredService<IStartupManager>();
 
         _isLoadingSettings = true;
         LoadSettings();
@@ -222,7 +224,7 @@ public partial class MainViewModel : ObservableObject
     {
         _settingsService.CurrentSettings.StartWithWindows = value;
         _settingsService.SaveAsync();
-        // TODO: Implement Windows startup registry entry
+        _startupManager.SetStartupEnabled(value);
     }
 
     partial void OnStartMinimizedChanged(bool value)
