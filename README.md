@@ -27,14 +27,14 @@ A high-performance, anti-cheat-safe music overlay that lets you control Spotify,
 - .NET 8.0 Runtime
 
 ### Quick Install
-1. Download the latest installer from [Releases](https://github.com/yourusername/TunesLayer/releases)
+1. Download the latest installer from [Releases](https://github.com/CostinCJ/TunesLayer/releases)
 2. Run `TunesLayer-Setup-x.x.x.exe`
 3. Launch TunesLayer from the Start menu
 
 ### Build from Source
 ```powershell
 # Clone the repository
-git clone https://github.com/yourusername/TunesLayer.git
+git clone https://github.com/CostinCJ/TunesLayer.git
 cd TunesLayer
 
 # Build the solution
@@ -161,7 +161,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
-- [GitHub Issues](https://github.com/yourusername/TunesLayer/issues)
+- [GitHub Issues](https://github.com/CostinCJ/TunesLayer/issues)
 - [Discord Server](https://discord.gg/tuneslayer)
 
 ---
